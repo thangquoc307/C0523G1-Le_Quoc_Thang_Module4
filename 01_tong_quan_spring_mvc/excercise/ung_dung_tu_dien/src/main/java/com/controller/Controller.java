@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class Controller {
     @Autowired
     private Repository repository;
-    @GetMapping("/mainpage")
+    @GetMapping("")
     public String showForm(){
         System.out.println("Vào get");
         return "index";
     }
-    @PostMapping("/mainpage")
+    @PostMapping("")
     public String translate(@RequestParam String word, Model model){
         System.out.println("Vào post");
         String result = repository.translate(word);
