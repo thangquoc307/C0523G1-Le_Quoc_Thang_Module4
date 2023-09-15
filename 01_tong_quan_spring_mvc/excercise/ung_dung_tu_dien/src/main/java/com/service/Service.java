@@ -1,12 +1,12 @@
 package com.service;
 
-import com.repository.Repository;
+import com.repository.IRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @org.springframework.stereotype.Service
-public class Service {
+public class Service implements IService{
     @Autowired
-    private Repository repository;
+    private IRepository repository;
     public String translate(String word){
         return repository.translate(word);
     }

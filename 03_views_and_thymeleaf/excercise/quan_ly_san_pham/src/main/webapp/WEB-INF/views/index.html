@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <title>display all product</title>
+    <style>
+        h3{
+            background-color: blue;
+            color: white;
+            padding: 10px 0px 10px 20px;
+        }
+        #data-table{
+            border-collapse: collapse;
+            width: 100%;
+        }
+        #data-table td, #data-table th{
+            border: 1px #ddd solid;
+            padding: 8px;
+        }
+        #data-table tr:nth-child(even){
+            background-color: #f2f2f2;
+        }
+        #data-table tr:hover {
+            background-color: #ddd;
+        }
+        #data-table th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+        }
+        input[type=text],input[type=email]{
+            width: 100%;
+            padding: 12px 0;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=submit] {
+            width: 300px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+        #form {
+            width: 500px;
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        .notify span{font-size: 15px; color: blue;}
+    </style>
+</head>
+<body>
+<h3>Danh sách</h3>
+<table>
+    <thead>
+    <tr>
+        <td>Số thứ tự</td>
+        <td>Tên sản phẩm</td>
+        <td>Giá tiền</td>
+        <td>Chỉnh sửa</td>
+<!--        <td>Xem chi tiết</td>-->
+<!--        <td>Xóa</td>-->
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product, productStat : ${list}">
+        <td th:text="${productStat}"></td>
+        <td th:text="${product.getName()}"></td>
+        <td th:text="${product.getPrice()}"></td>
+        <td><a th:href="edit/${product.getId()}">Sửa</a></td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+<footer th:fragment="footer">
+    Đây là cái footer
+</footer>
+</body>
+<script>
+
+</script>
+</html>

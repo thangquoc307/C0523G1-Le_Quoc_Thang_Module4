@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class CalculatorController {
-    @GetMapping("/mainpage")
+    @GetMapping("")
     public String createForm(){
         return "index";
     }
@@ -16,12 +16,11 @@ public class CalculatorController {
     public String changeCurrency(@RequestParam String changeTo,
                                  @RequestParam double currency,
                                  Model model){
-
-        double result;
+        double result = 0;
         int convertFactor = 24000;
-        if (changeTo.equals("1")){
+        if ("VND to USD".equals(changeTo)){
             result = currency / convertFactor;
-        } else {
+        } else if ("USD to VND".equals(changeTo)){
             result = currency * convertFactor;
         }
 

@@ -5,10 +5,10 @@
     <title>Chuyển đổi tiền tệ</title>
 </head>
 <body>
-<form method="post">
+<form action="mainpage" method="post">
     <select name="changeTo">
-        <option value="1" ${change.equals("1") ? "selected" : ""}>VND to USD</option>
-        <option value="2" ${change.equals("2") ? "selected" : ""}>USD to VND</option>
+        <option ${"VND to USD".equals(change) ? "selected" : ""}>VND to USD</option>
+        <option ${"USD to VND".equals(change) ? "selected" : ""}>USD to VND</option>
     </select>
     <input name="currency" type="number" value="${input}">
     <button type="submit">change</button>

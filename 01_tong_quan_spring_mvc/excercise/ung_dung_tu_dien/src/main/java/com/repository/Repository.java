@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @org.springframework.stereotype.Repository
-public class Repository {
+public class Repository implements IRepository{
     private final static Map<String, String> map = new HashMap<>();
     static {
         map.put("rectangle", "hình chữ nhật");
@@ -13,10 +13,11 @@ public class Repository {
     }
     public String translate(String word){
 
-        String result = "biết chết á";
-        if (map.containsKey(word)){
-            result = map.get(word);
+        String result = map.get(word);
+        if (result == null){
+            return word + " chưa cập nhật trong từ điển";
+        } else {
+            return result;
         }
-        return result;
     }
 }
