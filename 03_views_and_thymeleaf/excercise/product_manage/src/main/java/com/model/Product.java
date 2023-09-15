@@ -57,4 +57,15 @@ public class Product {
     public void setManufacture(String manufacture) {
         this.manufacture = manufacture;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", description='" + description + '\'' +
+                ", manufacture='" + manufacture + '\'' +
+                '}';
+    }
 }
