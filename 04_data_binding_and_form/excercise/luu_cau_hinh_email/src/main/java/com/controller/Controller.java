@@ -1,7 +1,7 @@
 package com.controller;
 
 import com.model.EmailSetup;
-import com.service.Service;
+import com.service.IService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @org.springframework.stereotype.Controller
 public class Controller {
     @Autowired
-    private Service service;
+    private IService service;
     @GetMapping("")
     public String showSetup(Model model){
         model.addAttribute("setup", service.show());

@@ -1,12 +1,12 @@
 package com.model;
 
 public class EmailSetup {
-    private int language;
+    private String language;
     private int pageSize;
     private boolean enableSpamsFilter;
     String signature;
 
-    public EmailSetup(int language, int pageSize, boolean enableSpamsFilter, String signature) {
+    public EmailSetup(String language, int pageSize, boolean enableSpamsFilter, String signature) {
         this.language = language;
         this.pageSize = pageSize;
         this.enableSpamsFilter = enableSpamsFilter;
@@ -14,11 +14,11 @@ public class EmailSetup {
     }
     public EmailSetup(){}
 
-    public int getLanguage() {
+    public String getLanguage() {
       return this.language;
     }
 
-    public void setLanguage(int language) {
+    public void setLanguage(String language) {
         this.language = language;
     }
 

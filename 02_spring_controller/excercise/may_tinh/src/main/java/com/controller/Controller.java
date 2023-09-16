@@ -20,6 +20,7 @@ public class Controller {
         System.out.println(number1);
         System.out.println(number2);
         System.out.println(action);
+
         model.addAttribute("number1", number1);
         model.addAttribute("number2", number2);
         double result = 0;
@@ -38,7 +39,7 @@ public class Controller {
                 break;
             case 4:
                 if (number2 == 0){
-                    model.addAttribute("result", "Chia cho 0 như nào cha");
+                    model.addAttribute("result", "Không thể chia cho 0");
                 } else {
                     result = number1 / number2;
                     model.addAttribute("result", "Kết quả : " + result);

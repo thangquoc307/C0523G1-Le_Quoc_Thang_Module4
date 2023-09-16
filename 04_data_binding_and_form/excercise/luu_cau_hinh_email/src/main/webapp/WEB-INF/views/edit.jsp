@@ -18,10 +18,10 @@
         <tr>
             <td><form:label path="language">Language:</form:label></td>
             <td><form:select path="language">
-                <form:option value="0">English</form:option>
-                <form:option value="1">Vietnamese</form:option>
-                <form:option value="2">Japanese</form:option>
-                <form:option value="3">Chinese</form:option>
+                <form:option value="English">English</form:option>
+                <form:option value="Vietnamese">Vietnamese</form:option>
+                <form:option value="Japanese">Japanese</form:option>
+                <form:option value="Chinese">Chinese</form:option>
             </form:select></td>
         </tr>
         <tr>

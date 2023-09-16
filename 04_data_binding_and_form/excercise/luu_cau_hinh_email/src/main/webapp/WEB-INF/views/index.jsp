@@ -12,7 +12,7 @@
     </tr>
     <tr>
         <td>Page Size:</td>
-        <td>${setup.pageSize}</td>
+        <td>${setup.pageSize} email / page</td>
     </tr>
     <tr>
         <td>Enable spams filter:</td>

@@ -3,8 +3,8 @@ package com.repository;
 import com.model.EmailSetup;
 
 @org.springframework.stereotype.Repository
-public class Repository {
-    private static EmailSetup emailSetup = new EmailSetup(1,25,true,"chữ ký");
+public class Repository implements IRepository{
+    private static EmailSetup emailSetup = new EmailSetup("Vietnamese",25,true,"chữ ký");
 
     public EmailSetup show(){
         return emailSetup;
