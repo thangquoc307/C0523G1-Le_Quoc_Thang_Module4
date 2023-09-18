@@ -1,0 +1,2 @@
+    <link rel="stylesheet" href="/resources/css/filename.css"/>
+    <script src="/resources/js/filename.js"></script>

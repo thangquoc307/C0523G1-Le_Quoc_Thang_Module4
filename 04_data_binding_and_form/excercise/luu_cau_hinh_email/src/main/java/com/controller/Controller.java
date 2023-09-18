@@ -14,6 +14,7 @@ public class Controller {
     private IService service;
     @GetMapping("")
     public String showSetup(Model model){
+        System.out.println(service.show());
         model.addAttribute("setup", service.show());
         return "index";
     }
