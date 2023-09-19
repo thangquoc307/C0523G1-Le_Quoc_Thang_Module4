@@ -1,16 +1,18 @@
 package com.service;
 
 import com.model.EmailSetup;
-import com.repository.IRepository;
+import com.repository.IEmailSetupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @org.springframework.stereotype.Service
-public class Service implements IService{
+public class EmailSetupService implements IEmailSetupService {
     @Autowired
-    private IRepository repository;
+    private IEmailSetupRepository repository;
+    @Override
     public EmailSetup show(){
         return repository.show();
     }
+    @Override
     public void edit(EmailSetup newEmailSetup) {
         repository.edit(newEmailSetup);
     }

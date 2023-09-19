@@ -4,7 +4,7 @@ public class EmailSetup {
     private String language;
     private int pageSize;
     private boolean enableSpamsFilter;
-    String signature;
+    private String signature;
 
     public EmailSetup(String language, int pageSize, boolean enableSpamsFilter, String signature) {
         this.language = language;
