@@ -6,7 +6,7 @@ import org.hibernate.Transaction;
 import javax.persistence.TypedQuery;
 import java.util.List;
 @org.springframework.stereotype.Repository
-public class Repository implements IRepository{
+public class ProductRepository implements IProductRepository {
 
     @Override
     public List<Product> getAll() {
@@ -29,13 +29,13 @@ public class Repository implements IRepository{
     }
 
     @Override
-    public void edit(int index, Product product) {
+    public void edit(int id, Product product) {
         Session session = ConnectionUtil.sessionFactory.openSession();
         Transaction transaction = session.getTransaction();
         try {
             transaction.begin();
 
-            Product productEdit = findById(index);
+            Product productEdit = detail(id);
             System.out.println(productEdit);
 
             productEdit.setName(product.getName());
@@ -52,12 +52,12 @@ public class Repository implements IRepository{
     }
 
     @Override
-    public void delete(int index) {
+    public void delete(int id) {
         Session session = ConnectionUtil.sessionFactory.openSession();
         Transaction transaction = session.getTransaction();
         try{
             transaction.begin();
-            Product productDel = findById(index);
+            Product productDel = detail(id);
             session.delete(productDel);
             transaction.commit();
         } catch (Exception e){
@@ -66,8 +66,11 @@ public class Repository implements IRepository{
     }
 
     @Override
-    public Product detail(int index) {
-        return findById(index);
+    public Product detail(int id) {
+        Session session = ConnectionUtil.sessionFactory.openSession();
+        TypedQuery<Product> productTypedQuery = session.createQuery("from Product where id = :id", Product.class);
+        productTypedQuery.setParameter("id", id);
+        return productTypedQuery.getSingleResult();
     }
 
     @Override
@@ -76,13 +79,5 @@ public class Repository implements IRepository{
         TypedQuery<Product> listSearch = session.createQuery("from Product where name like :key", Product.class);
         listSearch.setParameter("key", "%" + keyword + "%");
         return listSearch.getResultList();
-    }
-
-    @Override
-    public Product findById(int id) {
-        Session session = ConnectionUtil.sessionFactory.openSession();
-        TypedQuery<Product> productTypedQuery = session.createQuery("from Product where id = :id", Product.class);
-        productTypedQuery.setParameter("id", id);
-        return productTypedQuery.getSingleResult();
     }
 }

@@ -4,12 +4,11 @@ import com.model.Product;
 
 import java.util.List;
 
-public interface IRepository {
+public interface IProductRepository {
     List<Product> getAll();
     void create(Product product);
-    void edit(int index, Product product);
-    void delete(int index);
-    Product detail(int index);
+    void edit(int id, Product product);
+    void delete(int id);
+    Product detail(int id);
     List<Product> search(String keyword);
-    Product findById(int id);
 }
