@@ -14,7 +14,7 @@ import javax.validation.Valid;
 @Controller
 public class MusicManageController {
     @Autowired
-    IMusicService service;
+    private IMusicService service;
     @GetMapping("/")
     public String showAllMusic(Model model){
         model.addAttribute("musicList", service.getAllMusic());
@@ -22,35 +22,35 @@ public class MusicManageController {
     }
     @GetMapping("/create")
     public String showFormCreate(Model model){
-        model.addAttribute("music", new MusicDto());
+        model.addAttribute("musicDto", new MusicDto());
         return "create";
     }
     @PostMapping("/create")
-    public String createNewMusic(@Valid @ModelAttribute MusicDto music,
+    public String createNewMusic(@Valid @ModelAttribute MusicDto musicDto,
                                  BindingResult bindingResult){
-        new MusicDto().validate(music, bindingResult);
+        new MusicDto().validate(musicDto, bindingResult);
         if (bindingResult.hasErrors()){
             return "create";
         }
         Music newMusic = new Music();
-        BeanUtils.copyProperties(music, newMusic);
+        BeanUtils.copyProperties(musicDto, newMusic);
         service.createMusic(newMusic);
         return "redirect:/";
     }
     @GetMapping("/edit/{id}")
     public String showFormEdit(@PathVariable int id, Model model){
-        model.addAttribute("music", service.getMusicById(id));
+        model.addAttribute("musicDto", service.getMusicById(id));
         return "edit";
     }
     @PostMapping("/edit")
-    public String editMusic(@Valid @ModelAttribute MusicDto music,
+    public String editMusic(@Valid @ModelAttribute MusicDto musicDto,
                             BindingResult bindingResult){
-        new MusicDto().validate(music, bindingResult);
+        new MusicDto().validate(musicDto, bindingResult);
         if (bindingResult.hasErrors()){
             return "edit";
         }
         Music newMusic = new Music();
-        BeanUtils.copyProperties(music, newMusic);
+        BeanUtils.copyProperties(musicDto, newMusic);
         service.updateMusic(newMusic);
         return "redirect:/";
     }

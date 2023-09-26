@@ -14,19 +14,19 @@
     <input type="hidden" th:field="*{id}">
     <tr>
       <td>Ngày tạo</td>
-      <td><input type="date" th:field="*{createDate}"></td>
+      <td><input required type="date" th:field="*{createDate}"></td>
     </tr>
     <tr>
       <td>Thể loại</td>
-      <td><input type="text" th:field="*{category}"></td>
+      <td><input required type="text" th:field="*{category}"></td>
     </tr>
     <tr>
       <td>Tác giả</td>
-      <td><input type="text" th:field="*{own}"></td>
+      <td><input required type="text" th:field="*{own}"></td>
     </tr>
     <tr>
       <td>Nội dung</td>
-      <td><input type=text th:field="*{content}"></td>
+      <td><input required type=text th:field="*{content}"></td>
     </tr>
   </table>
   <button>Gửi</button>

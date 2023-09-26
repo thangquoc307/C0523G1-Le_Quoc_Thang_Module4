@@ -13,7 +13,10 @@ public class Blog {
     private String own;
     @Column(columnDefinition = "LONGTEXT")
     private String content;
-    private String category;
+    @ManyToOne
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
+
+    private Categories category;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate createDate;
 
@@ -28,11 +31,11 @@ public class Blog {
     public Blog() {
     }
 
-    public String getCategory() {
+    public Categories getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Categories category) {
         this.category = category;
     }
 

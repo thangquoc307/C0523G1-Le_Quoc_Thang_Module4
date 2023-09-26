@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class BlogController {
     @Autowired
-    IBlogService blogService;
+    private IBlogService blogService;
     @GetMapping("/")
     public String displayAll(Model model,
                              @RequestParam(required = false, defaultValue = "") String search,
