@@ -2,6 +2,7 @@ package com.blog.controller;
 
 import com.blog.model.Blog;
 import com.blog.service.IBlogService;
+import com.blog.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 public class BlogController {
     @Autowired
     private IBlogService blogService;
+    @Autowired
+    private ICategoryService categoryService;
     @GetMapping("/")
     public String displayAll(Model model,
                              @RequestParam(required = false, defaultValue = "") String search,
@@ -28,6 +31,7 @@ public class BlogController {
     }
     @GetMapping("/create")
     public String showFomrCreate(Model model){
+        model.addAttribute("categories", categoryService.getAll());
         model.addAttribute("newBlog", new Blog());
         return "/create";
     }
@@ -38,6 +42,7 @@ public class BlogController {
     }
     @GetMapping("/edit/{id}")
     public String showFormEdit(@PathVariable int id, Model model){
+        model.addAttribute("categories", categoryService.getAll());
         model.addAttribute("editBlog", blogService.findById(id));
         return "/edit";
     }

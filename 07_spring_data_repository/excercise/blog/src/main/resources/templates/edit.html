@@ -18,7 +18,9 @@
     </tr>
     <tr>
       <td>Thể loại</td>
-      <td><input required type="text" th:field="*{category}"></td>
+      <td><select th:field="*{category}">
+        <option th:each="category: ${categories}" th:value="*{category.id}" th:text="*{category.getCategory()}"></option>
+      </select></td>
     </tr>
     <tr>
       <td>Tác giả</td>
