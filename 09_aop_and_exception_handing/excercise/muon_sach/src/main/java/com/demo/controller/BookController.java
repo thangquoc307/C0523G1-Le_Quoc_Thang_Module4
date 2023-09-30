@@ -44,6 +44,7 @@ public class BookController {
         iBookService.update(book);
         Bill bill = new Bill(numberRandom, book);
         iBillService.createBill(bill);
+
         redirectAttributes.addFlashAttribute("numberRandom", numberRandom);
         return "redirect:/";
     }
