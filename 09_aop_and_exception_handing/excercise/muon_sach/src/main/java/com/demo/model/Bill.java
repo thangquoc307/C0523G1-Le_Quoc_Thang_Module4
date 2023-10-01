@@ -1,31 +1,30 @@
 package com.demo.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
 public class Bill {
     @Id
     @Column(unique = true, nullable = false)
-    private String numberRandom;
+    private String hireCode;
     @OneToOne
     @JoinColumn(name = "book_id", referencedColumnName = "id")
     private Book book;
 
-    public Bill(String numberRandom, Book book) {
-        this.numberRandom = numberRandom;
+    public Bill(String hireCode, Book book) {
+        this.hireCode = hireCode;
         this.book = book;
     }
 
     public Bill() {
     }
 
-    public String getNumberRandom() {
-        return numberRandom;
+    public String getHireCode() {
+        return hireCode;
     }
 
-    public void setNumberRandom(String numberRandom) {
-        this.numberRandom = numberRandom;
+    public void setHireCode(String hireCode) {
+        this.hireCode = hireCode;
     }
 
     public Book getBook() {
