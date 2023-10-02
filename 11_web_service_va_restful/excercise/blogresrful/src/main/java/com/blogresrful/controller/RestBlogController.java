@@ -13,14 +13,14 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("api/blog")
+@RequestMapping("/api")
 public class RestBlogController {
     @Autowired
     private ICategoryService iCategoryService;
     @Autowired
     private IBlogService iBlogService;
     @GetMapping("/category")
-    public ResponseEntity<List<CategoryEntity>> getListCategory(){
+    public ResponseEntity<List<CategoryEntity>> getCategoryList(){
         List<CategoryEntity> list = iCategoryService.showAllCategory();
         if (list.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -29,7 +29,7 @@ public class RestBlogController {
         }
     }
     @GetMapping("/blog")
-    public ResponseEntity<List<BlogEntity>> getListBlog(){
+    public ResponseEntity<List<BlogEntity>> getBlogList(){
         List<BlogEntity> list = iBlogService.showAllBlog();
         if (list.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -38,7 +38,7 @@ public class RestBlogController {
         }
     }
     @GetMapping("category/{id}")
-    public ResponseEntity<List<BlogEntity>> getListBlogByCategory(@PathVariable int id){
+    public ResponseEntity<List<BlogEntity>> getBlogListByCategory(@PathVariable int id){
         List<BlogEntity> list = iBlogService.getBlogByCategory(id);
         if (list.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
