@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+    <style>
+        table{
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 2px 5px;
+            border: black 1px solid;
+        }
+    </style>
+<!--    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>-->
+        <script src="/jquery.js"></script>
+</head>
+<body>
+<h3>Trang tâm sự tuổi vị thành niên</h3>
+<input id="search_input" placeholder="Kiếm theo title" type="text">
+<button id="btn-search">Tìm kiếm</button>
+<table>
+    <thead>
+    <tr>
+        <th>STT</th>
+        <th>Tiêu đề</th>
+        <th>Tác giả</th>
+        <th>Ngày phát hành</th>
+        <th>Nội dung</th>
+    </tr>
+    </thead>
+    <tbody id="content">
+<!--        <tr th:each="blog, blogstatus : ${page_0.content}">-->
+<!--            <td th:text="${blogstatus.index + 1}"></td>-->
+<!--            <td th:text="${blog.title}"></td>-->
+<!--            <td th:text="${blog.owner}"></td>-->
+<!--            <td th:text="${#dates.format(blog.releaseDate, 'dd/MM/yyyy')}"></td>-->
+<!--            <td th:text="${blog.content}"></td>-->
+<!--        </tr>-->
+    </tbody>
+</table>
+<button id="more">Hiển thị thêm</button>
+</body>
+<script>
+    let page = 0;
+    $(document).ready(function (){
+        $("#more").click(function () {
+            showMore();
+        })
+        $("#btn-search").click(function () {
+            searchBlog();
+        })
+    })
+    function showMore(){
+        let content = "";
+        $.ajax({
+            contentType: "application/json",
+            method: "GET",
+            url: `http://localhost:8080/api/blog/show?page=${page++}`,
+            success: function (data) {
+                let dataContent = data.content;
+                for (let i = 0; i < dataContent.length; i++){
+                    content += `<tr>
+                                    <td>${(page - 1) * 2 + i + 1}</td>
+                                    <td>${dataContent[i].title}</td>
+                                    <td>${dataContent[i].owner}</td>
+                                    <td>${formatDate(dataContent[i].releaseDate)}</td>
+                                    <td>${dataContent[i].content}</td>
+                                </tr>`;
+                }
+                $("#content").append(content);
+            },
+            catch: function () {
+                alert("toang");
+            }
+        })
+    }
+    function searchBlog(){
+        let keywordSearch = $("#search_input").val();
+        let content = "";
+        $.ajax({
+            contextType: "application/json",
+            method: "GET",
+            url: `http://localhost:8080/api/blog/search?keyword=${keywordSearch}`,
+            success: function (data) {
+                console.log(data)
+                for (let i = 0; i < data.length; i++){
+                    content += `<tr>
+                                    <td>${i + 1}</td>
+                                    <td>${data[i].title}</td>
+                                    <td>${data[i].owner}</td>
+                                    <td>${formatDate(data[i].releaseDate)}</td>
+                                    <td>${data[i].content}</td>
+                                </tr>`;
+                }
+                $("#content").html(content);
+            },
+            catch: function () {
+                alert("toang");
+            }
+        })
+    }
+    function formatDate(day){
+        let year = day.substring(0,4);
+        let month = day.substring(5,7);
+        let dayOfMonth = day.substring(8,10);
+        return dayOfMonth + "-" + month + "-" + year;
+    }
+</script>
+</html>
