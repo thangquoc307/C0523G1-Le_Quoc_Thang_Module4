@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CreatePage</title>
+  <link rel="stylesheet" href="/mainCss.css">
+</head>
+<body class="color2" onload="checkDate()">
+<button onclick="backToMainPage()">Back to MainPage</button>
+<form action="/create" method="post" th:object="${newsDto}">
+  <table>
+    <tr>
+      <td>Tiêu đề</td>
+      <td>
+        <input th:field="*{title}">
+        <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+      </td>
+    </tr>
+    <tr>
+      <td>Danh mục</td>
+      <td>
+        <select th:field="*{newsTypeEntity}">
+          <option th:each="type : ${newsTypeList}" th:text="${type.type}" th:value="${type.id}"></option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>Ngày đăng</td>
+      <td>
+        <input id="dateInput" type="date" th:field="*{postDate}">
+        <span id="checkDate"></span>
+      </td>
+    </tr>
+    <tr>
+      <td>Phóng viên</td>
+      <td>
+        <input th:field="*{own}">
+        <span th:if="${#fields.hasErrors('own')}" th:errors="*{own}"></span>
+      </td>
+    </tr>
+    <tr>
+      <td>Nội dung</td>
+      <td>
+        <input th:field="*{content}">
+        <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></span>
+      </td>
+    </tr>
+  </table>
+  <button type="submit">submit</button>
+</form>
+</body>
+<script src="/controlJS.js"></script>
+</html>

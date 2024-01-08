@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mainpage</title>
+    <link rel="stylesheet" href="/mainCss.css">
+</head>
+<body class="color2">
+<div class="color1 filler boxshadow-outset" id="confirmTable">
+    <p id="contentAlert">Are you sure about <span class="targetText" id="content"></span></p>
+    <div id="cancel" class="filler boxshadow-outset hover" onclick="closeConfirmTable()">Cancel</div>
+    <div id="confirm" class="filler boxshadow-outset hover" onclick="confirmTable()">Confirm</div>
+    <input id="confirmId" type="hidden">
+    <input id="confirmAction" type="hidden">
+</div>
+
+<div class="color1 boxshadow-outset" id="detail-table">
+    <p>Tiêu đề</p>
+    <p id="tieu_de"></p>
+
+    <p>Danh mục</p>
+    <p id="danh_muc"></p>
+
+    <p>Nội dung</p>
+    <p id="noi_dung"></p>
+
+    <p>Ngày đăng</p>
+    <p id="ngay_dang"></p>
+
+    <p>Phóng viên</p>
+    <p id="phong_vien"></p>
+
+    <button onclick="closeTable()">Close</button>
+</div>
+
+
+<input id="search" placeholder="Search" type="text" onchange="search()">
+<button onclick="create()">Create</button>
+
+<table>
+    <thead>
+    <tr>
+        <th>Stt</th>
+        <th>Tiêu đề</th>
+        <th>Danh mục</th>
+        <th>Nội dung</th>
+        <th>Ngày đăng</th>
+        <th>Phóng viên</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="news, newsStt : ${newsList}">
+        <td th:text="${newsStt.count}"></td>
+        <td th:id="${'title' + newsStt.count}" th:text="${news.title}"></td>
+        <td th:id="${'type' + newsStt.count}" th:text="${news.newsTypeEntity.type}"></td>
+        <td th:id="${'content' + newsStt.count}" th:text="${news.content}"></td>
+        <td th:id="${'date' + newsStt.count}" th:text="${news.postDate}"></td>
+        <td th:id="${'own' + newsStt.count}" th:text="${news.own}"></td>
+        <td>
+            <button th:attr="onclick=|editProduct(${newsStt.count})|">chi tiết</button>
+            <button th:attr="onclick=|deleteProduct(${news.id}, '${news.title}')|">delete</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+<script src="/controlJS.js"></script>
+</html>
